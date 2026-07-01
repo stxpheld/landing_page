@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function MentionsLegales() {
   return (
     <LegalShell title="Mentions légales">
-      <p className="rounded-[var(--radius-btn)] border border-line bg-white p-4 text-sm">
+      <p className="rounded-[var(--radius-btn)] border border-line bg-surface p-4 text-sm">
         ⚠️ Contenu à compléter avec vos informations réelles (raison sociale,
         SIRET, hébergeur, etc.).
       </p>

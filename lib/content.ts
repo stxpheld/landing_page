@@ -17,10 +17,10 @@ export const nav = {
 
 export const hero = {
   badge: "✦ Agence IA — Automatisation & Implémentation",
-  title:
-    "Transformez vos process métier avec l'IA — sans vous perdre dans la technique.",
+  title: "L'IA qui travaille pour vous, sans ",
+  titleAccent: "la complexité.",
   subtitle:
-    "J'aide les entreprises ambitieuses à identifier, concevoir et déployer des solutions IA concrètes qui font gagner du temps, de l'argent et de la clarté.",
+    "J'aide les entreprises ambitieuses à concevoir et déployer des solutions IA concrètes — qui font gagner du temps, de l'argent et de la clarté.",
   primaryCta: { label: "Réserver un appel gratuit", href: "#contact" },
   secondaryCta: { label: "Voir les offres", href: "#offres" },
   socialProof: [
@@ -55,12 +55,12 @@ export const painPoints = {
     },
     {
       icon: "BrainCircuit",
-      title: "« Je ne sais pas par où commencer avec l'IA »",
+      title: "« Je ne sais pas par où commencer »",
       text: "ChatGPT, Zapier, Make, n8n, LangChain… le maquis technologique vous freine.",
     },
     {
       icon: "Wallet",
-      title: "« J'ai peur d'investir sans voir de résultats »",
+      title: "« J'ai peur d'investir sans résultat »",
       text: "Trop d'agences promettent la lune et livrent de la complexité inutile.",
     },
   ],
@@ -126,7 +126,7 @@ export const services = {
 };
 
 export const about = {
-  title: "Derrière l'agence, il y a Stéphane.",
+  title: "Derrière l'agence, il y a un humain.",
   // TODO: personnaliser les passages entre [crochets].
   bio: [
     "Je ne suis pas une agence anonyme avec 50 sous-traitants offshore. Je suis Stéphane — consultant IA indépendant, [X années] d'expérience en [secteur], passionné par la façon dont l'intelligence artificielle peut libérer les humains des tâches qui les épuisent.",
@@ -227,7 +227,7 @@ export const caseStudies = {
 
 // Placeholders — à remplacer par de vrais témoignages signés (avec accord).
 export const testimonials = {
-  title: "Ce que disent ceux avec qui j'ai travaillé",
+  title: "Ce qu'ils en disent",
   note: "Témoignages d'exemple — à remplacer par les vrais (avec photo et accord).",
   items: [
     {

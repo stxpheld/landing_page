@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function Confidentialite() {
   return (
     <LegalShell title="Politique de confidentialité">
-      <p className="rounded-[var(--radius-btn)] border border-line bg-white p-4 text-sm">
+      <p className="rounded-[var(--radius-btn)] border border-line bg-surface p-4 text-sm">
         ⚠️ Modèle à adapter à votre situation et à faire valider si nécessaire.
       </p>
       <h2>Données collectées</h2>

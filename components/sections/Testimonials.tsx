@@ -16,7 +16,7 @@ export function Testimonials() {
         <div className="grid gap-6 md:grid-cols-3">
           {testimonials.items.map((t, i) => (
             <ScrollReveal key={i} delay={i * 0.08} className="h-full">
-              <figure className="flex h-full flex-col gap-5 rounded-[var(--radius-card)] border border-line bg-white p-7">
+              <figure className="flex h-full flex-col gap-5 rounded-[var(--radius-card)] border border-line bg-surface p-7">
                 <div className="flex gap-0.5" aria-label={`Note ${t.rating} sur 5`}>
                   {Array.from({ length: t.rating }).map((_, s) => (
                     <Star

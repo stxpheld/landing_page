@@ -1,21 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Inter_Tight } from "next/font/google";
+import { Manrope } from "next/font/google";
 import "./globals.css";
 import { site } from "@/lib/site";
 
-// Inter — corps de texte & H3 (PRD §2.3)
-const inter = Inter({
-  variable: "--font-inter",
+// Manrope — police unique (display + corps + labels)
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
   display: "swap",
-});
-
-// Inter Tight utilisé en mono-substitut pour labels/badges (PRD §2.3)
-const interMono = Inter_Tight({
-  variable: "--font-inter-mono",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -84,17 +77,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="fr"
-      className={`${inter.variable} ${interMono.variable} h-full`}
-    >
+    <html lang="fr" className={`${manrope.variable} h-full`}>
       <head>
-        {/* Cabinet Grotesk via Fontshare (PRD §2.3) */}
-        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@700,800,500,600&display=swap"
-          rel="stylesheet"
-        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

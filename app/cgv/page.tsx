@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 export default function Cgv() {
   return (
     <LegalShell title="Conditions générales de vente">
-      <p className="rounded-[var(--radius-btn)] border border-line bg-white p-4 text-sm">
+      <p className="rounded-[var(--radius-btn)] border border-line bg-surface p-4 text-sm">
         ⚠️ Modèle indicatif à compléter avec vos conditions réelles (devis,
         paiement, livraison, rétractation).
       </p>

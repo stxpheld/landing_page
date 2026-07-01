@@ -16,7 +16,7 @@ export function PainPoints() {
             const Icon = icons[card.icon as keyof typeof icons];
             return (
               <ScrollReveal key={card.title} delay={i * 0.08}>
-                <div className="flex h-full flex-col gap-4 rounded-[var(--radius-card)] border border-line bg-white p-7">
+                <div className="flex h-full flex-col gap-4 rounded-[var(--radius-card)] border border-line bg-surface p-7">
                   <span className="flex h-12 w-12 items-center justify-center rounded-[var(--radius-btn)] bg-indigo/10">
                     <Icon size={24} className="text-indigo" aria-hidden="true" />
                   </span>

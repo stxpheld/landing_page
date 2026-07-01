@@ -39,7 +39,7 @@ export function CalEmbed() {
   }
 
   return (
-    <div className="overflow-hidden rounded-[var(--radius-card)] bg-white">
+    <div className="overflow-hidden rounded-[var(--radius-card)] bg-surface">
       <Cal
         calLink={site.calLink}
         style={{ width: "100%", height: "100%", minHeight: "560px", overflow: "scroll" }}

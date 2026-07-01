@@ -26,7 +26,7 @@ export function Process() {
               delay={i * 0.08}
               className="relative flex gap-4 md:flex-col md:gap-4"
             >
-              <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line bg-white font-display text-sm font-bold text-indigo">
+              <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-line bg-surface font-display text-sm font-bold text-indigo">
                 {step.num}
               </span>
               <div className="flex flex-col gap-2 pt-1 md:pt-0">

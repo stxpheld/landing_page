@@ -6,7 +6,7 @@ import { caseStudies } from "@/lib/content";
 
 export function CaseStudies() {
   return (
-    <section id="resultats" className="section-pad bg-white scroll-mt-20">
+    <section id="resultats" className="section-pad bg-surface scroll-mt-20">
       <div className="container-page flex flex-col gap-12">
         <SectionHeading
           eyebrow="Résultats"
@@ -38,7 +38,7 @@ export function CaseStudies() {
                   {study.results.map((r) => (
                     <div
                       key={r}
-                      className="flex items-start gap-2 rounded-[var(--radius-btn)] border border-line bg-white p-3"
+                      className="flex items-start gap-2 rounded-[var(--radius-btn)] border border-line bg-surface p-3"
                     >
                       <TrendingUp
                         size={18}

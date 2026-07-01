@@ -9,7 +9,7 @@ export function Accordion({ items }: { items: Item[] }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="divide-y divide-line rounded-[var(--radius-card)] border border-line bg-white">
+    <div className="divide-y divide-line rounded-[var(--radius-card)] border border-line bg-surface">
       {items.map((item, i) => {
         const isOpen = open === i;
         const panelId = `faq-panel-${i}`;

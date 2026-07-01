@@ -21,8 +21,8 @@ export function Services() {
               <div
                 className={`flex h-full flex-col gap-5 rounded-[var(--radius-card)] border p-6 sm:p-8 ${
                   offer.featured
-                    ? "border-indigo bg-slate text-white shadow-[0_30px_70px_-40px_rgba(59,59,255,0.6)] lg:-mt-4 lg:mb-[-1rem]"
-                    : "border-line bg-white"
+                    ? "border-indigo/60 bg-[linear-gradient(180deg,rgba(139,123,255,0.14),rgba(139,123,255,0.03))] text-white shadow-[0_40px_90px_-40px_rgba(139,123,255,0.7)] lg:-mt-4 lg:mb-[-1rem]"
+                    : "border-line bg-surface"
                 }`}
               >
                 <Badge tone={offer.featured ? "signal" : "indigo"}>

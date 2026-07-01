@@ -8,10 +8,10 @@ import { hero } from "@/lib/content";
 export function Hero() {
   return (
     <section className="relative overflow-hidden">
-      {/* Dégradé subtil cream → blanc (PRD §4.2) */}
+      {/* Halo violet du hero (thème sombre) */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_50%_at_85%_0%,rgba(59,59,255,0.06),transparent),radial-gradient(40%_40%_at_100%_30%,rgba(0,229,160,0.07),transparent)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(55%_60%_at_80%_10%,rgba(139,123,255,0.16),transparent_60%)]"
       />
       <div className="container-page relative grid items-center gap-12 py-16 md:grid-cols-[1.05fr_0.95fr] md:py-24 lg:py-28">
         {/* Colonne texte */}
@@ -20,7 +20,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-3.5 py-1.5 font-mono text-xs font-medium text-ink"
+            className="inline-flex items-center gap-2 rounded-full border border-line bg-surface px-3.5 py-1.5 font-mono text-xs font-medium text-ink"
           >
             <Sparkles size={14} className="text-indigo" aria-hidden="true" />
             {hero.badge}
@@ -33,6 +33,7 @@ export function Hero() {
             className="text-balance text-4xl font-extrabold leading-[1.05] text-ink sm:text-5xl lg:text-6xl"
           >
             {hero.title}
+            <span className="text-indigo">{hero.titleAccent}</span>
           </motion.h1>
 
           <motion.p
@@ -92,7 +93,7 @@ export function Hero() {
 /** Mockup de tableau de bord IA (placeholder visuel — à remplacer par une vraie capture). */
 function HeroMockup() {
   return (
-    <div className="relative rounded-[var(--radius-card)] border border-line bg-white p-5 shadow-[0_40px_80px_-40px_rgba(26,26,46,0.4)]">
+    <div className="relative rounded-[var(--radius-card)] border border-white/10 bg-[#0d1016] p-5 shadow-[0_50px_120px_-50px_rgba(139,123,255,0.55)]">
       <div className="mb-4 flex items-center gap-1.5">
         <span className="h-3 w-3 rounded-full bg-line" />
         <span className="h-3 w-3 rounded-full bg-line" />
@@ -131,7 +132,7 @@ function HeroMockup() {
       </div>
 
       {/* Pastille flottante */}
-      <div className="absolute -bottom-4 -left-4 flex items-center gap-2 rounded-[8px] border border-line bg-white px-3 py-2 shadow-lg">
+      <div className="absolute -bottom-4 -left-4 flex items-center gap-2 rounded-[8px] border border-line bg-surface px-3 py-2 shadow-lg">
         <span className="flex h-7 w-7 items-center justify-center rounded-full bg-signal/20">
           <Sparkles size={14} className="text-ink" />
         </span>

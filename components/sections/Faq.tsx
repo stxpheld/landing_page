@@ -5,7 +5,7 @@ import { faq } from "@/lib/content";
 
 export function Faq() {
   return (
-    <section className="section-pad bg-white">
+    <section className="section-pad bg-surface">
       <div className="container-page flex flex-col gap-12">
         <SectionHeading eyebrow="FAQ" title={faq.title} />
         <ScrollReveal className="mx-auto w-full max-w-3xl">

@@ -1,27 +1,29 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Design System — Agence IA (PRD §2)
+   Design System — Agence IA · THÈME SOMBRE
+   (accent violet #8B7BFF, police Manrope, cartes verre)
    ============================================================ */
 @theme {
   /* Couleurs */
-  --color-cream: #f7f6f2; /* Fond principal — blanc cassé */
-  --color-slate: #141414; /* Fond alternatif — ardoise sombre */
-  --color-indigo: #3b3bff; /* Accent primaire — indigo profond */
+  --color-cream: #08090c; /* Fond principal — near-black (nom conservé) */
+  --color-slate: #0a0b0f; /* Fond alternatif — très légèrement distinct */
+  --color-surface: #101319; /* Surface carte (verre) */
+  --color-indigo: #8b7bff; /* Accent primaire — violet doux (nom conservé) */
   --color-signal: #00e5a0; /* Accent secondaire — vert signal */
-  --color-ink: #1a1a2e; /* Texte principal — anthracite */
-  --color-muted: #6b6b7b; /* Texte secondaire — gris chaud */
-  --color-line: #e4e4e8; /* Bordures / séparateurs */
+  --color-ink: #e7e9ee; /* Texte principal — blanc cassé */
+  --color-muted: #8b909a; /* Texte secondaire — gris clair */
+  --color-line: #20232b; /* Bordures / séparateurs */
 
-  /* Polices */
-  --font-display: "Cabinet Grotesk", "Syne", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-inter-mono), ui-monospace, monospace;
+  /* Polices — Manrope partout */
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 
   /* Rayons */
-  --radius-card: 12px;
-  --radius-btn: 8px;
-  --radius-badge: 4px;
+  --radius-card: 16px;
+  --radius-btn: 10px;
+  --radius-badge: 6px;
 
   /* Largeur de contenu */
   --container-page: 1280px;
@@ -39,15 +41,32 @@
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
-  scroll-padding-top: 88px; /* compense le header sticky lors des ancres */
+  scroll-padding-top: 88px;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--color-cream);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 17px;
   line-height: 1.6;
+}
+
+/* Halo violet diffus en haut de page */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 40% at 20% -5%, rgba(139, 123, 255, 0.14), transparent 60%),
+    radial-gradient(40% 30% at 90% 0%, rgba(139, 123, 255, 0.08), transparent 55%);
+}
+
+body > * {
+  position: relative;
+  z-index: 1;
 }
 
 h1,
@@ -94,6 +113,13 @@ h3,
   .section-pad {
     padding-block: 100px;
   }
+}
+
+/* Surface "verre" réutilisable pour les cartes */
+.glass {
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
 }
 
 /* Carrousel logos infini (PRD §4.3) */
