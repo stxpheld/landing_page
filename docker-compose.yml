@@ -1,0 +1,51 @@
+services:
+  landing-page:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        # Variables NEXT_PUBLIC_* : doivent être connues AU BUILD (lues depuis .env).
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL}
+        NEXT_PUBLIC_CONTACT_EMAIL: ${NEXT_PUBLIC_CONTACT_EMAIL}
+        NEXT_PUBLIC_CALCOM_LINK: ${NEXT_PUBLIC_CALCOM_LINK}
+        NEXT_PUBLIC_LINKEDIN_URL: ${NEXT_PUBLIC_LINKEDIN_URL}
+        NEXT_PUBLIC_TWITTER_URL: ${NEXT_PUBLIC_TWITTER_URL}
+        NEXT_PUBLIC_YOUTUBE_URL: ${NEXT_PUBLIC_YOUTUBE_URL}
+        NEXT_PUBLIC_PLAUSIBLE_DOMAIN: ${NEXT_PUBLIC_PLAUSIBLE_DOMAIN}
+    container_name: landing-page
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+    # Le port n'est PAS publié sur l'hôte : seul Traefik (sur le même
+    # réseau Docker) doit pouvoir joindre le conteneur.
+    expose:
+      - "3000"
+
+    # Routage Traefik — ⚠️ vérifie que `entrypoints` et `certresolver`
+    # correspondent bien aux noms définis dans la config statique de ton
+    # Traefik existant (traefik.yml / arguments de la CLI). "websecure" et
+    # "letsencrypt" sont les noms les plus courants mais pas garantis.
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`app.srv1472299.hstgr.cloud`)"
+      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.tls.certresolver=letsencrypt"
+      - "traefik.http.services.app.loadbalancer.server.port=3000"
+
+    networks:
+      - proxy
+
+    # ── Si AUCUN reverse proxy externe n'existe (test local / debug) ────────
+    # Commente le bloc "networks" ci-dessus et décommente ceci à la place :
+    # ports:
+    #   - "3000:3000"
+
+networks:
+  proxy:
+    external: true
+    # Réseau de la stack Docker Compose n8n déjà en place sur ce VPS
+    # (confirmé via `docker network ls` le 2026-07-03). Le reverse proxy
+    # de cette stack (probablement Caddy) est déjà connecté dessus.
+    name: n8n_default

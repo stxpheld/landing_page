@@ -1,40 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Landing page — Agence IA
 
-## Getting Started
+Next.js (App Router) · Tailwind v4 · Framer Motion. Voir le contenu éditorial dans [lib/content.ts](lib/content.ts) et la configuration dans [lib/site.ts](lib/site.ts).
 
-First, run the development server:
+## Développement local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Déploiement Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Le repo est connecté à Vercel : chaque push sur `main` redéploie automatiquement.
 
-## Learn More
+## Déploiement Docker (VPS — app.srv1472299.hstgr.cloud)
 
-To learn more about Next.js, take a look at the following resources:
+Le projet inclut un `Dockerfile` (build multi-stage, sortie Next.js `standalone`) et un `docker-compose.yml` prévus pour tourner **derrière le reverse proxy déjà en place sur le VPS** — le conteneur n'expose rien sur 80/443, seulement le port interne `3000`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 1. Préparer l'environnement
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Sur le VPS, dans le dossier du projet :
 
-## Deploy on Vercel
+```bash
+cp .env.local.example .env
+# éditer .env : renseigner NEXT_PUBLIC_CALCOM_LINK, RESEND_API_KEY,
+# NEXT_PUBLIC_SITE_URL=https://app.srv1472299.hstgr.cloud, etc.
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 2. Réseau Docker du reverse proxy existant
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Confirmé sur ce VPS (`docker network ls`) : la stack **n8n** déjà en place utilise le réseau **`n8n_default`**, déjà configuré dans `docker-compose.yml`.
 
-# landing_page
+### 3. Routage Traefik vers `app.srv1472299.hstgr.cloud`
 
-Landing page de l'agence IA de Stéphane — Next.js (App Router), Tailwind v4, Framer Motion.
+Le service est configuré avec des labels Traefik (routeur `app`) :
+
+```yaml
+labels:
+  - "traefik.enable=true"
+  - "traefik.http.routers.app.rule=Host(`app.srv1472299.hstgr.cloud`)"
+  - "traefik.http.routers.app.entrypoints=websecure"
+  - "traefik.http.routers.app.tls.certresolver=letsencrypt"
+  - "traefik.http.services.app.loadbalancer.server.port=3000"
+```
+
+⚠️ **Vérifie avant de lancer** que `entrypoints` (`websecure`) et `certresolver` (`letsencrypt`) correspondent aux noms réellement définis dans la configuration statique de ton Traefik existant (fichier `traefik.yml` ou arguments CLI/labels de son propre `docker-compose.yml`). Pour vérifier :
+
+```bash
+docker inspect <nom-du-conteneur-traefik> | grep -A3 "entryPoints\|certresolver\|certResolver"
+# ou, si Traefik utilise un fichier de conf statique :
+cat /chemin/vers/traefik.yml
+```
+
+Si les noms diffèrent, adapte les deux lignes correspondantes dans `docker-compose.yml`.
+
+> Vérifie d'abord le proxy réellement utilisé : `docker compose -f <chemin-vers-le-compose-n8n> ps` sur le VPS pour lister les services de la stack n8n.
+
+### 4. Build & lancement
+
+```bash
+docker compose build
+docker compose up -d
+docker compose logs -f landing-page
+```
+
+> ⚠️ Les variables `NEXT_PUBLIC_*` sont injectées **au build** (elles finissent dans le bundle JS envoyé au navigateur). Si tu modifies l'une d'elles dans `.env`, il faut relancer `docker compose build` (pas juste `up`) pour qu'elle soit prise en compte.
+
+### 5. Mise à jour
+
+```bash
+git pull
+docker compose build
+docker compose up -d
+```
