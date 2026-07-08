@@ -31,7 +31,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.app.rule=Host(`app.srv1472299.hstgr.cloud`)"
       - "traefik.http.routers.app.entrypoints=websecure"
-      - "traefik.http.routers.app.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.app.tls.certresolver=mytlschallenge"
       - "traefik.http.services.app.loadbalancer.server.port=3000"
 
     networks:
